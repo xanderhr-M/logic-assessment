@@ -207,7 +207,7 @@ tbody tr:hover{background:var(--paper)}
         <table><thead><tr>
           <th>姓名</th><th>應徵職務</th>
           <th id="dash-sort-date" onclick="sortRecords('date')" style="cursor:pointer;user-select:none">面試日期 ⇅</th>
-          <th>加權分數</th><th>最強維度</th>
+          <th>正確率</th><th>最強維度</th>
           <th id="dash-sort-testDate" onclick="sortRecords('testDate')" style="cursor:pointer;user-select:none">測驗日期時間 ⇅</th>
           <th>操作</th>
         </tr></thead>
@@ -460,7 +460,7 @@ function renderDashTable(){
     <tr>
       <td><strong>${r.name}</strong></td><td>${r.job}</td>
       <td>${r.date||'—'}</td>
-      <td><span class="score-badge" style="color:var(--green)">${r.weightedScore||0}</span> 分</td>
+      <td><span class="score-badge" style="color:var(--green)">${(()=>{var tot=(parseInt(r.abstract||0)+parseInt(r.visual||0)+parseInt(r.quant||0)+parseInt(r.critical||0));return Math.round(tot/30*100)})()}%</span></td>
       <td><span class="tag" style="background:${DIM_BG[r.mainDim]||'#f0f0f0'};color:${DIM_COLORS[r.mainDim]||'#333'}">${r.mainDim||'—'}</span></td>
       <td style="font-size:12px;color:var(--ink3)">${r.testDate||'<span style="color:#bbb">未記錄</span>'}</td>
       <td><button class="btn-secondary btn-sm" onclick="openReport(${r._sheetRow})">📄 報告</button></td>
